@@ -23,7 +23,7 @@ A modern, responsive weather application that provides current conditions, histo
 1. Clone the repository:
 ```bash
 git clone <repository-url>
-cd weather-app
+cd INM420SBB_API/
 ```
 
 2. Install dependencies:
