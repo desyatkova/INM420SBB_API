@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="icon" type="image/svg+xml" href="/vite.svg"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Katy App</title>
+</head>
+<body data-theme="caramellatte">
+
+<div class="min-h-screen flex flex-col">
+    <div class="navbar bg-base-100 shadow-sm">
+        <div class="flex-1">
+            <a class="btn btn-ghost text-xl">Katy's App ☔️</a>
+        </div>
+        <div class="flex gap-2">
+            <input type="text" placeholder="Search" class="input input-bordered w-24 md:w-auto"/>
+            <div class="dropdown dropdown-end">
+                <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+                    <div class="w-10 rounded-full bg-base-300 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-base-content" fill="none"
+                             viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                        </svg>
+                    </div>
+                </div>
+                <ul tabindex="0"
+                    class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                    <li>
+                        <a class="justify-between">
+                            Profile
+                            <span class="badge">New</span>
+                        </a>
+                    </li>
+                    <li><a>Settings</a></li>
+                    <li><a>Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <main class="flex-grow">
+        <div class="container mx-auto px-4 py-8">
+            <section class="bg-base-100 rounded-2xl shadow-xl p-6 md:p-8 mb-8">
+                <h2 class="text-2xl font-bold mb-6">Weather Forecast</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">Search City</span>
+                        </label>
+                        <div class="dropdown w-full">
+                            <label class="input input-bordered flex items-center gap-2 w-full">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
+                                     class="h-4 w-4 opacity-70">
+                                    <path fill-rule="evenodd"
+                                          d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                                          clip-rule="evenodd"/>
+                                </svg>
+                                <input
+                                        type="text"
+                                        id="citySearch"
+                                        placeholder="Type at least four characters to search for a city..."
+                                        class="grow"
+                                        autocomplete="off"
+                                />
+                            </label>
+                            <ul id="cityDropdown"
+                                class="dropdown-content menu bg-base-100 rounded-box z-[10] w-full p-2 shadow mt-1 max-h-60 overflow-auto hidden">
+
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">Select Date</span>
+                            <span class="label-text-alt">
+                <span class="badge badge-neutral badge-xs">Optional</span>
+              </span>
+                        </label>
+                        <div class="relative flex items-center">
+                            <input
+                                    type="date"
+                                    id="weatherDate"
+                                    class="input input-bordered w-full"
+                                    placeholder="Select date"
+                            />
+                            <button
+                                    type="button"
+                                    class="btn btn-ghost btn-sm btn-circle absolute right-10 invisible"
+                                    id="clearBtn"
+                                    tabindex="-1"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                                     stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M6 18L18 6M6 6l12 12"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="flex justify-end mb-6">
+                    <button class="btn btn-primary" id="searchWeatherBtn">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                             stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                        </svg>
+                        Search Weather
+                    </button>
+                </div>
+
+                <div class="divider"></div>
+
+
+                <div id="weatherResults" class="mt-6">
+
+                    <div class="text-center py-12">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24 mx-auto text-base-300 mb-4" fill="none"
+                             viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                                  d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/>
+                        </svg>
+                        <p class="text-base-content/60">Enter a city name to see weather forecast</p>
+                    </div>
+                </div>
+            </section>
+
+            <template id="weatherResultTemplate">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+                    <div class="bg-gradient-to-br from-blue-400 to-blue-600 text-white rounded-xl p-6">
+                        <h3 class="text-lg font-semibold mb-2" id="weatherTitle">Current Weather</h3>
+                        <div class="text-sm opacity-90 mb-3" id="weatherDate"></div>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-4xl font-bold" id="temperature">72°F</p>
+                                <p class="text-sm opacity-90" id="condition">Partly Cloudy</p>
+                            </div>
+                            <div id="weatherIcon" class="h-16 w-16">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-base-200 rounded-xl p-6">
+                        <h3 class="text-lg font-semibold mb-4" id="detailsTitle">Today's Details</h3>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between">
+                                <span class="text-base-content/70">Feels like</span>
+                                <span class="font-medium" id="feelsLike">75°F</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-base-content/70">Humidity</span>
+                                <span class="font-medium" id="humidity">65%</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-base-content/70">Wind Speed</span>
+                                <span class="font-medium" id="windSpeed">8 mph</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-base-content/70">UV Index</span>
+                                <span class="font-medium" id="uvIndex">6 (High)</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-base-content/70">High/Low</span>
+                                <span class="font-medium" id="highLow">75°/62°</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-base-200 rounded-xl p-6">
+                        <h3 class="text-lg font-semibold mb-4" id="forecastTitle">5-Day Forecast</h3>
+                        <div class="space-y-2" id="forecastList">
+                            <div class="flex items-center text-sm">
+                                <span class="w-12">Mon</span>
+                                <span class="w-8 text-center text-lg">☀️</span>
+                                <span class="font-medium ml-auto">75°/62°</span>
+                            </div>
+                            <div class="flex items-center text-sm">
+                                <span class="w-12">Tue</span>
+                                <span class="w-8 text-center text-lg">⛅</span>
+                                <span class="font-medium ml-auto">73°/60°</span>
+                            </div>
+                            <div class="flex items-center text-sm">
+                                <span class="w-12">Wed</span>
+                                <span class="w-8 text-center text-lg">🌧️</span>
+                                <span class="font-medium ml-auto">68°/55°</span>
+                            </div>
+                            <div class="flex items-center text-sm">
+                                <span class="w-12">Thu</span>
+                                <span class="w-8 text-center text-lg">☀️</span>
+                                <span class="font-medium ml-auto">71°/58°</span>
+                            </div>
+                            <div class="flex items-center text-sm">
+                                <span class="w-12">Fri</span>
+                                <span class="w-8 text-center text-lg">⛅</span>
+                                <span class="font-medium ml-auto">74°/61°</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </main>
+
+    <footer class="footer p-4 md:p-10 bg-base-200 text-base-content">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 w-full">
+            <div>
+                <div class="footer-title">Services</div>
+                <a class="link link-hover">Weather API</a>
+                <a class="link link-hover">Forecast</a>
+                <a class="link link-hover">Alerts</a>
+            </div>
+            <div>
+                <div class="footer-title">Company</div>
+                <a class="link link-hover">About us</a>
+                <a class="link link-hover">Contact</a>
+                <a class="link link-hover">Jobs</a>
+            </div>
+            <div>
+                <div class="footer-title">Legal</div>
+                <a class="link link-hover">Terms of use</a>
+                <a class="link link-hover">Privacy policy</a>
+                <a class="link link-hover">Cookie policy</a>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<script type="module" src="/src/main.js"></script>
+</body>
+</html>
